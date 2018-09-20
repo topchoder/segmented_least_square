@@ -30,10 +30,10 @@ double compute_a(point *points,int low,int high)
 	for(int i=low;i<=high;i++)
 		b+=points[i].x*points[i].x;
     
-    int n=high-low+1;
-    int sqr=sum_of_x*sum_of_x;
-    int sqr1=sum_of_x*sum_of_y;
-    return ((n*a)-sqr1)/((n*b)-(sqr));
+    	int n=high-low+1;
+    	int sqr=sum_of_x*sum_of_x;
+    	int sqr1=sum_of_x*sum_of_y;
+    	return ((n*a)-sqr1)/((n*b)-(sqr));
 }
 
 double compute_b(point *points,int low,int high,double a)
@@ -57,31 +57,31 @@ double compute(point *points,int low,int high)
 	double a,b;
 	a=compute_a(points,low,high);
 	b=compute_b(points,low,high,a);
-  double final=0;
-  //Computing ERROR for a segment
-  for(int i=low;i<=high;i++)
-  {
-      final+=((points[i].y-a*points[i].x-b)*(points[i].y-a*points[i].x-b));
-  }
-  return final;
+        double final=0;
+        //Computing ERROR for a segment
+        for(int i=low;i<=high;i++)
+  	{
+      		final+=((points[i].y-a*points[i].x-b)*(points[i].y-a*points[i].x-b));
+  	}		
+  	return final;
 }
 
-double ERROR(point *a,int low,int high,int partitions,int c)
+double ERROR(point *a,int low,int high,int partitions,double c)
 {
 	if(low==high)
-  {
-		 return 0;
-  }
+  	{
+	      return 0;
+  	}
   
 	double error=numeric_limits<double>::max();
   
 	for(int i=low;i<high;i++)
 	{
-        double err=ERROR(a,low,i,partitions,c)+ERROR(a,i+1,high,partitions+1,c)+compute(a,low,high)+(partitions)*c;
-        if(error>err)
-        {
-        	 error=err;
-        }
+        	double err=ERROR(a,low,i,partitions,c)+ERROR(a,i+1,high,partitions+1,c)+compute(a,low,high)+(partitions)*c;
+        	if(error>err)
+        	{
+        	 	error=err;
+        	}
 	}
 	return error;
 }
@@ -109,7 +109,7 @@ signed main(int argc,char **argv)
      }
      
      cout<<"enter constant of error"<<"\n";
-     int c;
+     double c;
      cin>>c;
      int partitions=1;
      cout<<ERROR(points,0,m-1,partitions,c)<<"\n";
